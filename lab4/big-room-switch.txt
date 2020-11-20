@@ -1,0 +1,14 @@
+enable
+configure terminal
+int range fa0/1-19
+switchport mode access
+switchport access vlan 10
+exit
+int fa0/20
+switchport mode access
+switchport access vlan 30
+exit
+int fa0/21
+switchport mode trunk
+exit
+end

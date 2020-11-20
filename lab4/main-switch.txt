@@ -1,0 +1,62 @@
+enable
+configure terminal
+vlan 10
+name MainOffice
+exit
+vlan 20
+name SecondOffice
+exit
+vlan 30
+name Cams
+exit
+vlan 40
+name Server
+exit
+int vlan 10
+ip address 10.10.0.1 255.255.255.0
+no shutdown
+exit
+int vlan 20
+ip address 10.20.0.1 255.255.255.0
+no shutdown
+exit
+int vlan 30
+ip address 10.30.0.1 255.255.255.0
+no shutdown
+exit
+int vlan 40
+ip address 10.40.0.2 255.255.255.0
+no shutdown
+exit
+vtp mode server
+vtp domain nikitaKochetkov.com
+vtp version 1
+
+
+int fa0/1
+switchport mode access
+switchport access vlan 40
+exit
+int fa0/2
+switchport mode access
+switchport access vlan 30
+exit
+int range fa0/3-4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+exit
+int vlan 10
+ip helper-address 10.40.0.1
+exit
+int vlan 20
+ip helper-address 10.40.0.1
+exit
+int vlan 30
+ip helper-address 10.40.0.1
+exit
+int vlan 40
+ip helper-address 10.40.0.1
+exit
+ip routing
+exit
+end
